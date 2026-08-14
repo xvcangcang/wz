@@ -15,8 +15,8 @@
 
 export const site = {
   // ----- 基础信息 -----
-  name: "许靖承",
-  nameEn: "XU JINGCHENG",
+  name: "许仓仓",
+  nameEn: "XU CANGCANG",
   role: "初中生 · 编程爱好者",
   school: "",
   location: "中国 · 福建福州",
@@ -31,7 +31,7 @@ export const site = {
     poster: null, // 可选：视频封面图
     statusLine: "PORTFOLIO — 2026",
     titleLine1: "你好，我是",
-    name: "许靖承", // 渲染为高亮色 + 底部微光
+    name: "许仓仓", // 渲染为高亮色 + 底部微光
     titleLine2: "用代码与创意，",
     titleAccent: "探索有趣的世界", // 渲染为点缀色
     subtitle:
@@ -45,7 +45,7 @@ export const site = {
   about: {
     sectionIndex: "01",
     sectionTitle: "关于我",
-    introHeading: "你好，我是许靖承。",
+    introHeading: "你好，我是许仓仓。",
     paragraphs: [
       "一名热爱编程的初中生，来自福建福州。从图形化编程入门，到 Python，再到用 Vibe Coding 快速把想法变成能用的软件，我在代码里找到了属于自己的乐趣。",
       "课余时间我喜欢研究无人机，也喜欢动手做些小工具——比如管理密码的「密码本」和记录剪贴板的「历史粘贴板」。对我而言，编程就是让生活更方便一点。",
@@ -157,6 +157,6 @@ export const site = {
       { label: "邮箱", href: "mailto:xvcangcang@163.com" },
       { label: "电话", href: "tel:15880420019" },
     ],
-    copyright: "© 2026 许靖承 · 保留所有权利",
+    copyright: "© 2026 许仓仓 · 保留所有权利",
   },
 };
