@@ -3,13 +3,14 @@
    ★ 内容来自「简历.txt」，需要调整时改这个文件即可
 
    两个素材开关：
-   1. hero.videoSrc   —— 填视频地址（如 "/hero.mp4"，文件放 public/ 下）
+   1. hero.videoSrc   —— 填视频地址（如 "hero.mp4"，文件放 public/ 下）
                          后，首页自动渲染 <video> 覆盖 CSS 动画背景
-   2. projects[].image —— 填截图地址（如 "/images/xxx.png"，截图放
+   2. projects[].image —— 填截图地址（如 "images/xxx.png"，截图放
                          public/images/ 下）后，卡片自动用 <img>
                          替换 SVG 占位图
    3. about.gallery[].src —— 个人图集：把 src 换成真实照片地址（照片放
                          public/images/gallery/ 下）即可替换占位图
+   ★ 图片地址一律不带前导 /（相对路径），部署在 GitHub Pages 子路径下才能正常加载
    ============================================================ */
 
 export const site = {
@@ -61,21 +62,21 @@ export const site = {
        增删照片：把图片放 public/images/gallery/ 并按顺序命名 photo-XX.jpg，
        或直接增删下面数组项。 */
     gallery: [
-      { src: "/images/gallery/photo-01.jpg", label: "个人图集 01" },
-      { src: "/images/gallery/photo-02.jpg", label: "个人图集 02" },
-      { src: "/images/gallery/photo-03.jpg", label: "个人图集 03" },
-      { src: "/images/gallery/photo-04.jpg", label: "个人图集 04" },
-      { src: "/images/gallery/photo-05.jpg", label: "个人图集 05" },
-      { src: "/images/gallery/photo-06.jpg", label: "个人图集 06" },
-      { src: "/images/gallery/photo-07.jpg", label: "个人图集 07" },
-      { src: "/images/gallery/photo-08.jpg", label: "个人图集 08" },
-      { src: "/images/gallery/photo-09.jpg", label: "个人图集 09" },
-      { src: "/images/gallery/photo-10.jpg", label: "个人图集 10" },
-      { src: "/images/gallery/photo-11.jpg", label: "个人图集 11" },
-      { src: "/images/gallery/photo-12.jpg", label: "个人图集 12" },
-      { src: "/images/gallery/photo-13.jpg", label: "个人图集 13" },
-      { src: "/images/gallery/photo-14.jpg", label: "个人图集 14" },
-      { src: "/images/gallery/photo-15.jpg", label: "个人图集 15" },
+      { src: "images/gallery/photo-01.jpg", label: "个人图集 01" },
+      { src: "images/gallery/photo-02.jpg", label: "个人图集 02" },
+      { src: "images/gallery/photo-03.jpg", label: "个人图集 03" },
+      { src: "images/gallery/photo-04.jpg", label: "个人图集 04" },
+      { src: "images/gallery/photo-05.jpg", label: "个人图集 05" },
+      { src: "images/gallery/photo-06.jpg", label: "个人图集 06" },
+      { src: "images/gallery/photo-07.jpg", label: "个人图集 07" },
+      { src: "images/gallery/photo-08.jpg", label: "个人图集 08" },
+      { src: "images/gallery/photo-09.jpg", label: "个人图集 09" },
+      { src: "images/gallery/photo-10.jpg", label: "个人图集 10" },
+      { src: "images/gallery/photo-11.jpg", label: "个人图集 11" },
+      { src: "images/gallery/photo-12.jpg", label: "个人图集 12" },
+      { src: "images/gallery/photo-13.jpg", label: "个人图集 13" },
+      { src: "images/gallery/photo-14.jpg", label: "个人图集 14" },
+      { src: "images/gallery/photo-15.jpg", label: "个人图集 15" },
     ],
   },
 
@@ -93,7 +94,7 @@ export const site = {
         year: "2026",
         type: "桌面应用",
         stack: ["Electron", "React", "TypeScript", "Tailwind"],
-        image: "/images/password-vault.png", // ★ 有截图后填 "/images/xxx.png"
+        image: "images/password-vault.png", // ★ 有截图后填 "images/xxx.png"
         variant: 0, // 占位图样式 0-3（image 为 null 时生效）
         link: "#",
       },
@@ -105,7 +106,7 @@ export const site = {
         year: "2026",
         type: "Windows 工具",
         stack: ["Python", "PyInstaller"],
-        image: "/images/clipboard-history.png",
+        image: "images/clipboard-history.png",
         imageFit: "contain", // 竖屏截图完整显示（默认 cover 铺满）
         variant: 1,
         link: "#",

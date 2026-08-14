@@ -12,7 +12,7 @@ export default function Hero() {
         <div className="aurora aurora--2" />
         <div className="aurora aurora--3" />
         <div className="hero__grid" />
-        {/* 使用真实视频：把 siteData.js 中 hero.videoSrc 改为视频文件地址（放 public/ 下，如 "/hero.mp4"） */}
+        {/* 使用真实视频：把 siteData.js 中 hero.videoSrc 改为视频文件地址（放 public/ 下，如 "hero.mp4"） */}
         {hero.videoSrc && (
           <video
             className="hero__video"
