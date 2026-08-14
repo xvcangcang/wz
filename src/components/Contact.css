@@ -1,0 +1,113 @@
+/* ============================================================
+   联系方式：整屏收尾页
+   ============================================================ */
+
+.contact {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 顶部径向青色微光 */
+.contact::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(600px at 50% 0%, var(--accent-soft), transparent);
+  pointer-events: none;
+}
+
+.contact__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-block: var(--section-pad);
+}
+
+/* 巨标题 */
+.contact__heading {
+  margin-top: var(--sp-6);
+  font-size: var(--text-display);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.contact__heading-accent {
+  color: var(--accent);
+}
+
+/* 邮箱：mono 大按钮 + 下划线扫入（点击复制） */
+.contact__email {
+  display: inline-block;
+  margin-top: var(--sp-12);
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: clamp(20px, 2.5vw, 32px);
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  background: linear-gradient(currentColor, currentColor) bottom left / 0% 1px
+    no-repeat;
+  transition: background-size 0.4s var(--ease-out);
+}
+
+.contact__email:hover {
+  background-size: 100% 1px;
+}
+
+/* 社交链接行：发丝线分隔 */
+.contact__socials {
+  display: flex;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.contact__socials li {
+  padding-inline: var(--sp-6);
+  border-right: 1px solid var(--line);
+}
+
+.contact__socials li:last-child {
+  border-right: none;
+}
+
+.contact__social {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-2);
+  transition: color 0.25s var(--ease-out);
+}
+
+.contact__social:hover {
+  color: var(--accent);
+}
+
+/* ---------- 底部栏 ---------- */
+.contact__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--sp-6);
+  border-top: 1px solid var(--line);
+}
+
+.contact__top {
+  color: var(--text-3);
+  transition: color 0.25s var(--ease-out);
+}
+
+.contact__top:hover {
+  color: var(--accent);
+}

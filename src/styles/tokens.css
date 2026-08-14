@@ -1,0 +1,71 @@
+/* ============================================================
+   设计令牌（Design Tokens）
+   改配色 / 字号 / 间距 / 动效都从这里入手，全站自动生效
+   ============================================================ */
+
+:root {
+  /* ---------- 背景 ---------- */
+  --bg: #08090d;               /* 页面底色，近黑带蓝调 */
+  --bg-soft: #0c0e14;          /* 区块交替 / 渐变过渡 */
+  --surface: #10131a;          /* 卡片 */
+  --surface-2: #161b24;        /* 悬浮态表面 */
+
+  /* ---------- 发丝线（低透明度，绝不用实色） ---------- */
+  --line: rgba(151, 164, 187, 0.14);
+  --line-strong: rgba(151, 164, 187, 0.3);
+
+  /* ---------- 文字 ---------- */
+  --text: #e9ebf1;
+  --text-2: #a2abbc;
+  --text-3: #6c7484;
+
+  /* ---------- 点缀色（全站唯一，克制使用） ---------- */
+  --accent: #4ec8ff;
+  --accent-soft: rgba(78, 200, 255, 0.14);
+  --accent-glow: rgba(78, 200, 255, 0.35);
+
+  /* ---------- 极光装饰色（仅 Hero 背景使用） ---------- */
+  --aurora-blue: rgba(47, 112, 255, 0.32);
+  --aurora-violet: rgba(124, 92, 255, 0.26);
+  --aurora-teal: rgba(0, 214, 200, 0.18);
+
+  /* ---------- 字体 ---------- */
+  --font-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    "Noto Sans SC", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "Cascadia Code", "SF Mono", Consolas,
+    "Courier New", monospace;
+
+  /* ---------- 字号阶梯 ---------- */
+  --text-hero: clamp(44px, 6.5vw, 104px);      /* Hero 大标题 */
+  --text-display: clamp(56px, 9vw, 144px);     /* 收尾页巨标题 */
+  --text-section: clamp(28px, 3.2vw, 48px);    /* 章节标题 */
+  --text-card: 22px;                           /* 卡片标题 */
+  --text-body: 16px;                           /* 正文 */
+  --text-mono: 12px;                           /* 技术标签 */
+
+  /* ---------- 间距（4px 基准） ---------- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+  --sp-24: 96px;
+  --sp-32: 128px;
+
+  /* ---------- 布局 ---------- */
+  --container: 1700px;                          /* 版心 */
+  --gutter: clamp(24px, 4vw, 72px);             /* 版心左右留白 */
+  --section-pad: clamp(64px, 8vw, 120px);       /* 区块上下留白 */
+  --nav-h: 64px;
+
+  /* ---------- 动效 ---------- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);   /* 高级感缓动 */
+
+  /* ---------- 层级 ---------- */
+  --z-bg: 0;
+  --z-content: 10;
+  --z-nav: 100;
+}

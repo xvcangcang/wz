@@ -1,0 +1,67 @@
+/* ---------- 螺旋个人图集（About 左列，替换原头像占位） ---------- */
+.spiral-gallery {
+  width: 100%;
+  max-width: 480px;
+  user-select: none;
+}
+
+.spiral-gallery__stage {
+  position: relative;
+  aspect-ratio: 1;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+}
+
+.spiral-gallery__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* 完整显示照片，横竖图都不裁切，留白处透出深色底 */
+}
+
+.spiral-gallery__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-top: var(--sp-3);
+}
+
+.spiral-gallery__count {
+  color: var(--text-2);
+}
+
+.spiral-gallery__dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.spiral-gallery__dot {
+  width: 6px;
+  height: 6px;
+  border: none;
+  border-radius: 999px;
+  padding: 0;
+  background: var(--line-strong);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out);
+}
+
+.spiral-gallery__dot--active {
+  width: 20px;
+  background: var(--accent);
+}
+
+.spiral-gallery__hint {
+  color: var(--text-3);
+}
+
+@media (max-width: 1024px) {
+  .spiral-gallery {
+    max-width: 360px;
+  }
+}

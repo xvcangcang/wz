@@ -1,0 +1,11 @@
+node_modules
+dist
+.DS_Store
+*.local
+
+# 不上传公开仓库：照片原图（压缩版已在 public/images/gallery/）、
+# 密码本（mmb）源码与数据、历史粘贴板（lsjtb）程序、个人简历
+photo/
+mmb/
+lsjtb/
+简历.txt

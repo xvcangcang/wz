@@ -1,0 +1,91 @@
+/* ============================================================
+   个人经历：5/7 非对称分栏（左：螺旋图集+统计 / 右：文字+联系）
+   ============================================================ */
+
+.about__grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(48px, 6vw, 120px);
+  align-items: start;
+}
+
+/* ---------- 左列 ---------- */
+.about__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 480px;
+  margin-top: var(--sp-8);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.about__stat {
+  padding: var(--sp-6);
+  border-right: 1px solid var(--line);
+}
+
+.about__stat:last-child {
+  border-right: none;
+}
+
+.about__stat-value {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: clamp(32px, 3vw, 44px);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.about__stat-label {
+  display: block;
+  margin-top: var(--sp-2);
+}
+
+/* ---------- 右列 ---------- */
+.about__intro {
+  margin-top: var(--sp-8);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.about__para {
+  margin-top: var(--sp-4);
+  font-size: var(--text-body);
+  color: var(--text-2);
+  max-width: 62ch;
+}
+
+/* 联系方式：mono 标签 + 值，发丝线分隔 */
+.about__contacts {
+  margin-top: 40px;
+}
+
+.about__contact {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.about__contact:first-child {
+  border-top: 1px solid var(--line);
+}
+
+.about__contact dd {
+  font-size: 15px;
+  color: var(--text);
+}
+
+@media (max-width: 1024px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about__stats {
+    max-width: 360px;
+  }
+}

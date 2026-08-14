@@ -1,0 +1,58 @@
+/* ---------- 灯箱（项目截图大图查看） ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gutter);
+  background: rgba(5, 7, 10, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: zoom-out;
+}
+
+.lightbox__figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.lightbox__img {
+  width: auto;
+  max-width: min(86vw, 1400px);
+  max-height: 80vh;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  box-shadow: 0 24px 80px -24px rgba(0, 0, 0, 0.8);
+}
+
+.lightbox__title {
+  color: var(--text-2);
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(8, 9, 13, 0.6);
+  color: var(--text-2);
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out);
+}
+
+.lightbox__close:hover {
+  border-color: var(--accent-soft);
+  color: var(--text);
+}

@@ -1,0 +1,233 @@
+/* ============================================================
+   全局基础样式：reset、版心、区块、按钮、chip、mono 标签、
+   噪点层、选区、滚动条
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  background: var(--bg);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: 1.8;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ---------- 版心 ---------- */
+.container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---------- 区块外壳 ---------- */
+.section {
+  position: relative;
+  padding-block: var(--section-pad);
+  scroll-margin-top: calc(var(--nav-h) + 8px);
+}
+
+/* ---------- mono 技术标签 ---------- */
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.mono-label .accent {
+  color: var(--accent);
+}
+
+/* ---------- 按钮 ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out);
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: #05070a;
+  font-weight: 600;
+}
+
+.btn--primary:hover {
+  box-shadow: 0 0 32px -8px var(--accent-glow);
+  transform: translateY(-1px);
+}
+
+.btn--ghost {
+  border-color: var(--line);
+  background: transparent;
+  color: var(--text-2);
+}
+
+.btn--ghost:hover {
+  border-color: var(--line-strong);
+  color: var(--text);
+}
+
+/* ---------- Chip 标签 ---------- */
+.chip {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  letter-spacing: 0.08em;
+  color: var(--text-2);
+  transition: all 0.25s var(--ease-out);
+}
+
+.chip:hover {
+  border-color: var(--accent-soft);
+  color: var(--text);
+}
+
+/* ---------- 章节头（SectionHeader 使用） ---------- */
+.section-head__index {
+  margin-bottom: var(--sp-4);
+}
+
+.section-head__title {
+  font-size: var(--text-section);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.section-head__sub {
+  margin-top: var(--sp-4);
+  font-size: 16px;
+  color: var(--text-2);
+  max-width: 60ch;
+}
+
+/* ---------- 统计数字 ---------- */
+.counter {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 遮罩行出场（Reveal line 变体） ---------- */
+.reveal-line {
+  display: block;
+  overflow: hidden;
+  /* 上下留出余量再负边距拉回，避免文字溢出/微光被裁剪 */
+  padding-block: 0.12em;
+  margin-block: -0.12em;
+}
+
+.reveal-line > span {
+  display: inline-block;
+  will-change: transform;
+  transform: translateY(115%);
+  transition: transform 0.9s var(--ease-out);
+}
+
+.reveal-line--in > span {
+  transform: translateY(0);
+}
+
+/* 系统开启「减少动态效果」：直接显示文字，不做遮罩动画 */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-line > span {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- 复制成功反馈（CopyButton） ---------- */
+.copy-btn--copied {
+  color: var(--accent) !important;
+}
+
+/* ---------- 噪点层（消除纯黑色带感） ---------- */
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* ---------- 选区 ---------- */
+::selection {
+  background: var(--accent);
+  color: #05070a;
+}
+
+/* ---------- 滚动条 ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-2);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--line-strong);
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-2) transparent;
+}
+
+/* ---------- 键盘焦点 ---------- */
+:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 3px;
+}

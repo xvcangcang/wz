@@ -1,0 +1,99 @@
+/* ============================================================
+   个人优势：4 卡网格 + 技能条宽度动画
+   ============================================================ */
+
+.strengths__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-6);
+  margin-top: clamp(48px, 6vw, 80px);
+}
+
+.strength-card {
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  transition: transform 0.3s var(--ease-out), border-color 0.3s var(--ease-out),
+    background 0.3s var(--ease-out);
+}
+
+.strength-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--line-strong);
+  background: var(--surface-2);
+}
+
+.strength-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.strength-card__icon {
+  width: 24px;
+  height: 24px;
+  color: var(--text-3);
+  transition: color 0.3s var(--ease-out);
+}
+
+.strength-card:hover .strength-card__icon {
+  color: var(--accent);
+}
+
+.strength-card__title {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.strength-card__desc {
+  margin-top: 10px;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--text-2);
+}
+
+/* ---------- 技能条 ---------- */
+.strength-card__meter {
+  margin-top: 28px;
+}
+
+.strength-card__meter-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.strength-card__value {
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.strength-card__track {
+  height: 2px;
+  background: var(--line);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.strength-card__fill {
+  height: 100%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+  border-radius: 1px;
+}
+
+@media (max-width: 1200px) {
+  .strengths__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .strengths__grid {
+    grid-template-columns: 1fr;
+  }
+}
