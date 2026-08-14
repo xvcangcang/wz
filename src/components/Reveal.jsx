@@ -19,9 +19,10 @@ export default function Reveal({
   className = "",
 }) {
   /* line 变体只用 framer 做进入视口观察，滑入动画交给 CSS transition：
-     transform 动画在 reduced-motion 下可能被跳过，若文字藏在遮罩里会永远不可见 */
+     transform 动画在 reduced-motion 下可能被跳过，若文字藏在遮罩里会永远不可见。
+     once:false → 离开视口自动滑出，回到顶部再往下滑会重新播放 */
   const lineRef = useRef(null);
-  const lineInView = useInView(lineRef, { once: true, margin: "-60px" });
+  const lineInView = useInView(lineRef, { once: false, margin: "-60px" });
 
   /* 遮罩行上移：标题文字从下往上滑入 */
   if (variant === "line") {
@@ -54,7 +55,7 @@ export default function Reveal({
         ...(isCard && { scale: 1 }),
         ...(blur && { filter: "blur(0px)" }),
       }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: false, margin: "-80px" }}
       transition={{ duration, delay, ease: EASE }}
     >
       {children}
