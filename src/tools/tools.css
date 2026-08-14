@@ -224,6 +224,30 @@
   justify-content: center;
 }
 
+/* 时长自定义输入 */
+.pomodoro__mins {
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-4);
+  margin-top: var(--sp-3);
+}
+
+.pomodoro__mins label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.pomodoro__mins .tool-input {
+  width: 60px;
+  padding: 6px 8px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
 /* ---------- 秒表 ---------- */
 .stopwatch__time {
   font-family: var(--font-mono);
@@ -558,10 +582,29 @@
 }
 
 /* ---------- 便签本 ---------- */
+.notes__head {
+  display: flex;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-3);
+}
+
+.notes__head .tool-select {
+  flex: 1;
+}
+
+.notes__title {
+  margin-bottom: var(--sp-2);
+}
+
 .notes__btns {
   display: flex;
   gap: var(--sp-2);
   margin-top: var(--sp-3);
+}
+
+.notes__btns .btn {
+  flex: 1;
+  justify-content: center;
 }
 
 .notes__hint {

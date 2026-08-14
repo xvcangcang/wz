@@ -14,7 +14,7 @@ import ColorTool from "./tools/ColorTool.jsx";
 import "./tools.css";
 
 const TOOLS = [
-  { id: "pomodoro", name: "番茄钟", tag: "专注计时", desc: "25 分钟工作 + 5 分钟休息，结束时响铃提醒。", component: Pomodoro },
+  { id: "pomodoro", name: "番茄钟", tag: "专注计时", desc: "专注/休息时长可自定义，结束时响铃提醒。", component: Pomodoro },
   { id: "stopwatch", name: "秒表", tag: "计时器", desc: "毫秒级计时，支持计次记录每一圈。", component: Stopwatch },
   { id: "date-countdown", name: "日期倒计时", tag: "计划", desc: "设置目标日期，实时显示还剩多少天。", component: DateCountdown },
   { id: "calculator", name: "计算器", tag: "日常", desc: "四则运算 + 百分比 + 正负号，支持连续运算。", component: Calculator },
@@ -22,7 +22,7 @@ const TOOLS = [
   { id: "password-gen", name: "密码生成器", tag: "安全", desc: "生成长度可调、字符集可选的强随机密码。", component: PasswordGen },
   { id: "unit-converter", name: "单位换算", tag: "换算", desc: "长度、重量、温度三类的双向换算。", component: UnitConverter },
   { id: "tally-counter", name: "计数打卡", tag: "计数", desc: "点一下 +1，记录次数，刷新页面不丢。", component: TallyCounter },
-  { id: "sticky-notes", name: "便签本", tag: "备忘", desc: "随手记，自动保存在本机浏览器里。", component: StickyNotes },
+  { id: "sticky-notes", name: "便签本", tag: "备忘", desc: "多篇笔记：新建、打开、保存，存在本机浏览器里。", component: StickyNotes },
   { id: "color-tool", name: "颜色工具", tag: "设计", desc: "取色器 + HEX/RGB 转换 + 随机配色。", component: ColorTool },
 ];
 
