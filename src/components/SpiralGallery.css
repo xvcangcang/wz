@@ -22,6 +22,44 @@
   object-fit: contain; /* 完整显示照片，横竖图都不裁切，留白处透出深色底 */
 }
 
+/* 左右箭头按钮：手机触屏切换（桌面滚轮仍可用） */
+.spiral-gallery__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  padding: 0;
+  background: rgba(8, 9, 13, 0.55);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: var(--text-2);
+  cursor: pointer;
+  transition:
+    color 0.25s var(--ease-out),
+    border-color 0.25s var(--ease-out),
+    background 0.25s var(--ease-out);
+}
+
+.spiral-gallery__arrow--prev {
+  left: 12px;
+}
+
+.spiral-gallery__arrow--next {
+  right: 12px;
+}
+
+.spiral-gallery__arrow:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
 .spiral-gallery__meta {
   display: flex;
   align-items: center;
@@ -41,6 +79,7 @@
 }
 
 .spiral-gallery__dot {
+  position: relative;
   width: 6px;
   height: 6px;
   border: none;
@@ -49,6 +88,13 @@
   background: var(--line-strong);
   cursor: pointer;
   transition: all 0.3s var(--ease-out);
+}
+
+/* 扩大手机触屏点击区域，视觉大小不变 */
+.spiral-gallery__dot::after {
+  content: "";
+  position: absolute;
+  inset: -9px;
 }
 
 .spiral-gallery__dot--active {

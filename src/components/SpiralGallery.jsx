@@ -55,13 +55,29 @@ export default function SpiralGallery() {
     setIndex(target);
   };
 
+  /* 箭头按钮切换（手机触屏；桌面滚轮仍可用） */
+  const step = (dir) => {
+    setDirection(dir);
+    setIndex((index + dir + count) % count);
+  };
+
   return (
     <div
       ref={wrapRef}
       className="spiral-gallery"
-      aria-label="个人图集：滚轮切换图片"
+      aria-label="个人图集：滚轮或按钮切换图片"
     >
       <div className="spiral-gallery__stage">
+        <button
+          className="spiral-gallery__arrow spiral-gallery__arrow--prev"
+          aria-label="上一张"
+          onClick={() => step(-1)}
+        >
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+
         <AnimatePresence mode="popLayout" custom={direction} initial={false}>
           <motion.img
             key={index}
@@ -102,6 +118,16 @@ export default function SpiralGallery() {
             transition={{ duration: 0.6, ease: EASE }}
           />
         </AnimatePresence>
+
+        <button
+          className="spiral-gallery__arrow spiral-gallery__arrow--next"
+          aria-label="下一张"
+          onClick={() => step(1)}
+        >
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
       </div>
 
       <div className="spiral-gallery__meta">
@@ -120,7 +146,7 @@ export default function SpiralGallery() {
             />
           ))}
         </div>
-        <span className="spiral-gallery__hint mono-label">滚轮切换</span>
+        <span className="spiral-gallery__hint mono-label">滚轮/箭头切换</span>
       </div>
     </div>
   );
