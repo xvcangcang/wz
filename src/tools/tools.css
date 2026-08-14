@@ -1,0 +1,622 @@
+/* ============================================================
+   工具箱页：页面壳 + 工具卡片 + 10 个工具样式（类名前缀 tool）
+   ============================================================ */
+
+/* ---------- 页面壳 ---------- */
+.tools-page {
+  min-height: 100svh;
+  padding-block: calc(var(--nav-h) + var(--sp-12)) var(--sp-24);
+}
+
+.tools-page__back {
+  display: inline-block;
+  color: var(--text-2);
+  transition: color 0.25s var(--ease-out);
+}
+
+.tools-page__back:hover {
+  color: var(--accent);
+}
+
+.tools-page__head {
+  margin-top: var(--sp-8);
+}
+
+.tools-page__index {
+  color: var(--accent);
+}
+
+.tools-page__title {
+  margin-top: var(--sp-4);
+  font-size: var(--text-section);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.tools-page__sub {
+  margin-top: var(--sp-4);
+  font-size: 16px;
+  color: var(--text-2);
+  max-width: 62ch;
+}
+
+/* ---------- 卡片网格 ---------- */
+.tools__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: var(--sp-6);
+  margin-top: var(--sp-12);
+}
+
+.tool-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-6);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  transition: border-color 0.3s var(--ease-out);
+}
+
+.tool-card:hover {
+  border-color: var(--line-strong);
+}
+
+.tool-card__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-3);
+}
+
+.tool-card__title {
+  font-size: var(--text-card);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.tool-card__desc {
+  font-size: 14px;
+  color: var(--text-3);
+  min-height: 2.4em;
+}
+
+.tool-card__body {
+  margin-top: auto;
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- 通用表单控件（暗色主题） ---------- */
+.tool-input,
+.tool-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.25s var(--ease-out);
+}
+
+.tool-input:focus,
+.tool-select:focus {
+  border-color: var(--line-strong);
+  outline: none;
+}
+
+.tool-textarea {
+  width: 100%;
+  min-height: 110px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.7;
+  resize: vertical;
+  transition: border-color 0.25s var(--ease-out);
+}
+
+.tool-textarea:focus {
+  border-color: var(--line-strong);
+  outline: none;
+}
+
+.tool-range {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.tool-check {
+  accent-color: var(--accent);
+  margin-right: 6px;
+  vertical-align: -2px;
+}
+
+.tool-label {
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-2);
+  cursor: pointer;
+}
+
+.tool-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.tool-btn {
+  padding: 8px 16px;
+  font-size: 12px;
+}
+
+.tool-btn--sm {
+  padding: 6px 12px;
+  font-size: 11px;
+}
+
+.tool-card .btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* ---------- 番茄钟 ---------- */
+.pomodoro__ring-wrap {
+  position: relative;
+  width: 200px;
+  margin: 0 auto;
+}
+
+/* 圆环进度每 250ms 跳一次，加过渡让走针变平滑 */
+.pomodoro__ring-wrap circle {
+  transition: stroke-dashoffset 0.3s linear;
+}
+
+.pomodoro__time {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 40px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.pomodoro__modes {
+  display: flex;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.pomodoro__modes .btn {
+  flex: 1;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.pomodoro__modes .btn--primary {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.pomodoro__controls {
+  display: flex;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.pomodoro__controls .btn {
+  flex: 1;
+  justify-content: center;
+}
+
+/* ---------- 秒表 ---------- */
+.stopwatch__time {
+  font-family: var(--font-mono);
+  font-size: 44px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  color: var(--text);
+}
+
+.stopwatch__controls {
+  display: flex;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.stopwatch__controls .btn {
+  flex: 1;
+  justify-content: center;
+}
+
+.stopwatch__laps {
+  margin-top: var(--sp-3);
+  max-height: 120px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stopwatch__lap {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+/* ---------- 日期倒计时 ---------- */
+.countdown__inputs {
+  display: flex;
+  gap: var(--sp-2);
+}
+
+.countdown__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.countdown__cell {
+  padding: var(--sp-3) var(--sp-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.countdown__cell b {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+  line-height: 1.2;
+}
+
+.countdown__cell span {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.countdown__empty {
+  margin-top: var(--sp-3);
+  padding: var(--sp-6);
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.countdown__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--sp-3);
+}
+
+/* ---------- 计算器 ---------- */
+.calc__display {
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  text-align: right;
+  overflow: hidden;
+}
+
+.calc__prev {
+  min-height: 18px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+.calc__cur {
+  font-family: var(--font-mono);
+  font-size: 34px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.calc__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.calc__btn {
+  padding: 12px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-out);
+}
+
+.calc__btn:hover {
+  border-color: var(--line-strong);
+  color: var(--accent);
+}
+
+.calc__btn--fn {
+  background: transparent;
+  color: var(--text-2);
+}
+
+.calc__btn--op {
+  color: var(--accent);
+}
+
+.calc__btn--eq {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #05070a;
+  font-weight: 600;
+}
+
+/* ---------- 随机抽签 ---------- */
+.pick__result {
+  margin-top: var(--sp-3);
+  padding: var(--sp-4);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--accent);
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pick__result--empty {
+  color: var(--text-3);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.pick__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--sp-3);
+}
+
+/* ---------- 密码生成器 ---------- */
+.pwgen__out {
+  display: flex;
+  gap: var(--sp-2);
+}
+
+.pwgen__value {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text);
+  word-break: break-all;
+  min-height: 41px;
+}
+
+.pwgen__len {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-top: var(--sp-3);
+}
+
+.pwgen__len b {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent);
+  min-width: 2ch;
+  text-align: right;
+}
+
+.pwgen__sets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-4);
+  margin-top: var(--sp-3);
+}
+
+.pwgen__strength {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-top: var(--sp-3);
+}
+
+.pwgen__bar {
+  flex: 1;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.pwgen__bar i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width 0.3s var(--ease-out);
+}
+
+/* ---------- 单位换算 ---------- */
+.unit__tabs {
+  display: flex;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-3);
+}
+
+.unit__tabs .btn {
+  flex: 1;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.unit__tabs .btn--primary {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.unit__row {
+  display: flex;
+  gap: var(--sp-2);
+  align-items: center;
+}
+
+.unit__row .tool-input {
+  flex: 1.2;
+}
+
+.unit__row .tool-select {
+  flex: 1;
+}
+
+.unit__row .unit__result {
+  flex: 1.2;
+}
+
+.unit__eq {
+  text-align: center;
+  color: var(--text-3);
+  font-family: var(--font-mono);
+  padding: var(--sp-1) 0;
+}
+
+.unit__result {
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 20px;
+  color: var(--accent);
+  word-break: break-all;
+}
+
+/* ---------- 计数打卡 ---------- */
+.tally__num {
+  font-family: var(--font-mono);
+  font-size: 52px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.tally__btns {
+  display: flex;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.tally__btns .btn {
+  flex: 1;
+  justify-content: center;
+}
+
+/* ---------- 便签本 ---------- */
+.notes__btns {
+  display: flex;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.notes__hint {
+  margin-top: var(--sp-2);
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+/* ---------- 颜色工具 ---------- */
+.color__row {
+  display: flex;
+  gap: var(--sp-2);
+  align-items: center;
+}
+
+.color__swatch {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.color__swatch::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.color__swatch::-webkit-color-swatch {
+  border: none;
+}
+
+.color__rgb {
+  margin-top: var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.color__rand {
+  margin-top: var(--sp-3);
+  display: flex;
+  gap: var(--sp-2);
+}
+
+.color__rand .btn {
+  flex: 1;
+  justify-content: center;
+}
+
+@media (max-width: 480px) {
+  .tools__grid {
+    grid-template-columns: 1fr;
+  }
+}
