@@ -10,6 +10,21 @@
 }
 
 /* ---------- 左列 ---------- */
+/* 图集上方的小标题：mono 标签 + 点缀短横线 */
+.about__gallery-label {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+}
+
+.about__gallery-label::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+}
+
 .about__stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

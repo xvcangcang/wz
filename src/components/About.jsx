@@ -14,6 +14,7 @@ export default function About() {
           {/* 左列：头像 + 数据统计 */}
           <div className="about__left">
             <Reveal variant="card" blur>
+              <div className="about__gallery-label mono-label">My life</div>
               <SpiralGallery />
             </Reveal>
             <Reveal variant="card" blur delay={0.12}>
