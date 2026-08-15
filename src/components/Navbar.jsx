@@ -12,6 +12,7 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     /* rAF 节流：滚动事件每帧最多触发一次 setState */
@@ -35,7 +36,11 @@ export default function Navbar() {
   return (
     <nav className={`navbar ${scrolled ? "navbar--scrolled" : ""}`}>
       <div className="container navbar__inner">
-        <a href="#top" className="navbar__logo mono-label">
+        <a
+          href="#top"
+          className="navbar__logo mono-label"
+          onClick={() => setMenuOpen(false)}
+        >
           {site.nameEn.replace(" ", "·")}
           <span className="navbar__logo-dot" />
         </a>
@@ -53,8 +58,46 @@ export default function Navbar() {
           <a className="btn btn--primary navbar__cta" href="#contact">
             联系我
           </a>
+
+          {/* 移动端汉堡按钮（≤900px 显示） */}
+          <button
+            type="button"
+            className={`navbar__menu-btn${menuOpen ? " navbar__menu-btn--open" : ""}`}
+            aria-label={menuOpen ? "关闭菜单" : "打开菜单"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
         </div>
       </div>
+
+      {/* 移动端下拉菜单 */}
+      {menuOpen && (
+        <div className="navbar__menu">
+          <div className="container">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.href}
+                className="navbar__menu-link mono-label"
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            ))}
+            <a
+              className="btn btn--primary navbar__menu-cta"
+              href="#contact"
+              onClick={() => setMenuOpen(false)}
+            >
+              联系我
+            </a>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

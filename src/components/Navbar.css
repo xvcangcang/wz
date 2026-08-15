@@ -92,8 +92,92 @@
   padding: 9px 20px;
 }
 
-@media (max-width: 768px) {
-  .navbar__links {
+/* ---------- 移动端汉堡菜单（≤900px） ---------- */
+.navbar__menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.navbar__menu-btn span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--text);
+  transition: transform 0.3s var(--ease-out), opacity 0.3s var(--ease-out);
+}
+
+/* 打开时三条横线变形为 × */
+.navbar__menu-btn--open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navbar__menu-btn--open span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar__menu-btn--open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.navbar__menu {
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  right: 0;
+  padding-block: var(--sp-4) var(--sp-6);
+  background: rgba(8, 9, 13, 0.94);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+}
+
+.navbar__menu-link {
+  display: block;
+  padding: 12px 4px;
+  color: var(--text-2);
+  border-bottom: 1px solid var(--line);
+  transition: color 0.25s var(--ease-out);
+}
+
+.navbar__menu-link:hover {
+  color: var(--accent);
+}
+
+.navbar__menu-cta {
+  margin-top: var(--sp-4);
+  width: 100%;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .navbar__links,
+  .navbar__cta {
     display: none;
+  }
+
+  .navbar__menu-btn {
+    display: flex;
+  }
+}
+
+/* 窄屏（iPhone SE / 小安卓）：收紧 logo 字距与间距防溢出 */
+@media (max-width: 380px) {
+  .navbar__logo {
+    letter-spacing: 0.12em;
+  }
+
+  .navbar__right {
+    gap: var(--sp-4);
   }
 }

@@ -96,4 +96,14 @@
   .strengths__grid {
     grid-template-columns: 1fr;
   }
+
+  /* 手机上 2px 轨道几乎看不见，加粗并同步圆角 */
+  .strength-card__track {
+    height: 6px;
+    border-radius: 3px;
+  }
+
+  .strength-card__fill {
+    border-radius: 3px;
+  }
 }
