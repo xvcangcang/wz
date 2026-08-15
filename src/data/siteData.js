@@ -16,7 +16,7 @@
 export const site = {
   // ----- 基础信息 -----
   name: "许仓仓",
-  nameEn: "XU CANGCANG",
+  nameEn: "XV CANGCANG",
   role: "初中生 · 编程爱好者",
   school: "",
   location: "中国 · 福建福州",
