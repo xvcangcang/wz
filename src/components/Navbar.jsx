@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { site } from "../data/siteData.js";
 import "./Navbar.css";
 
@@ -74,30 +75,38 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* 移动端下拉菜单 */}
-      {menuOpen && (
-        <div className="navbar__menu">
-          <div className="container">
-            {NAV_LINKS.map((link) => (
+      {/* 移动端下拉菜单：AnimatePresence 提供退场动画 */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="navbar__menu"
+            initial={{ opacity: 0, y: -14 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -14 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="container">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  className="navbar__menu-link mono-label"
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.label}
+                </a>
+              ))}
               <a
-                key={link.href}
-                className="navbar__menu-link mono-label"
-                href={link.href}
+                className="btn btn--primary navbar__menu-cta"
+                href="#contact"
                 onClick={() => setMenuOpen(false)}
               >
-                {link.label}
+                联系我
               </a>
-            ))}
-            <a
-              className="btn btn--primary navbar__menu-cta"
-              href="#contact"
-              onClick={() => setMenuOpen(false)}
-            >
-              联系我
-            </a>
-          </div>
-        </div>
-      )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
