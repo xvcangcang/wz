@@ -35,7 +35,7 @@ export const site = {
     titleLine2: "用代码与创意，",
     titleAccent: "探索有趣的世界", // 渲染为点缀色
     subtitle:
-      "热爱编程的初中生，会 Python 与图形化编程，喜欢用 Vibe Coding 把想法变成作品，也爱飞无人机。",
+      "热爱编程的初中生，会 Python 与图形化编程，喜欢用 Vibe Coding 把想法变成作品，喜欢用无人机记录美好的风景。",
     meta: ["中国 · 福建福州", "Python · 图形化编程", "Vibe Coding 实践者"],
     primaryCta: { label: "联系我", href: "#contact" },
     secondaryCta: { label: "查看项目", href: "#projects" },
