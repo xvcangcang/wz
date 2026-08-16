@@ -65,6 +65,11 @@
   border-color: var(--line-strong);
 }
 
+/* AI 对话等宽工具：卡片横跨整行 */
+.tool-card--wide {
+  grid-column: 1 / -1;
+}
+
 .tool-card__head {
   display: flex;
   align-items: baseline;
@@ -613,40 +618,273 @@
   color: var(--text-3);
 }
 
-/* ---------- 颜色工具 ---------- */
-.color__row {
+/* ---------- AI 对话 ---------- */
+.chat {
   display: flex;
-  gap: var(--sp-2);
-  align-items: center;
+  flex-direction: column;
+  gap: var(--sp-3);
 }
 
-.color__swatch {
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
+/* 工具条：模型信息 + 操作按钮 */
+.chat__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.chat__model {
+  margin-right: auto;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chat__count {
+  margin-left: 10px;
+  color: var(--text-3);
+}
+
+.chat__bar-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+/* 设置面板 */
+.chat__settings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-4);
   border: 1px solid var(--line);
   border-radius: 10px;
-  padding: 0;
-  background: none;
-  cursor: pointer;
-  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
 }
 
-.color__swatch::-webkit-color-swatch-wrapper {
-  padding: 0;
+.chat__set-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--sp-3);
 }
 
-.color__swatch::-webkit-color-swatch {
-  border: none;
-}
-
-.color__rgb {
-  margin-top: var(--sp-2);
-  font-family: var(--font-mono);
-  font-size: 13px;
+.chat__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
   color: var(--text-2);
 }
 
+.chat__set-btns {
+  display: flex;
+  gap: var(--sp-2);
+}
+
+/* 错误 / 成功横幅 */
+.chat__banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.chat__banner--err {
+  border: 1px solid rgba(255, 99, 99, 0.35);
+  background: rgba(255, 99, 99, 0.1);
+  color: #ff9d9d;
+}
+
+.chat__banner--ok {
+  border: 1px solid rgba(78, 200, 255, 0.35);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.chat__banner-x {
+  padding: 2px 4px;
+  border: none;
+  background: none;
+  color: inherit;
+  font-size: 12px;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.chat__banner-x:hover {
+  opacity: 1;
+}
+
+/* 消息区 */
+.chat__msgs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-height: 240px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: var(--sp-3);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.chat__empty {
+  margin: auto;
+  padding: var(--sp-6) var(--sp-3);
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--text-3);
+}
+
+.chat__msg {
+  max-width: 86%;
+  padding: 9px 13px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.7;
+  word-break: break-word;
+}
+
+.chat__msg--user {
+  align-self: flex-end;
+  background: var(--accent-soft);
+  border: 1px solid rgba(78, 200, 255, 0.25);
+  border-bottom-right-radius: 3px;
+  color: var(--text);
+}
+
+.chat__msg--ai {
+  align-self: flex-start;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-bottom-left-radius: 3px;
+  color: var(--text);
+  white-space: pre-wrap;
+}
+
+.chat__thinking {
+  color: var(--text-3);
+}
+
+.chat__thinking::after {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -2px;
+  background: var(--accent);
+  animation: chat-blink 0.9s steps(2) infinite;
+}
+
+@keyframes chat-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* AI 回复里的轻量 markdown 元素 */
+.chat__msg h3,
+.chat__msg h4,
+.chat__msg h5 {
+  margin: 0.5em 0 0.25em;
+  color: var(--accent);
+  line-height: 1.4;
+}
+
+.chat__msg h3 {
+  font-size: 15px;
+}
+
+.chat__msg h4 {
+  font-size: 14px;
+}
+
+.chat__msg h5 {
+  font-size: 13px;
+}
+
+.chat__msg code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.chat__msg pre {
+  margin: var(--sp-2) 0;
+  padding: var(--sp-3);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.35);
+  overflow-x: auto;
+}
+
+.chat__msg pre code {
+  padding: 0;
+  background: none;
+  color: var(--text);
+  white-space: pre;
+}
+
+.chat__msg a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* 输入区 */
+.chat__composer {
+  display: flex;
+  align-items: stretch;
+  gap: var(--sp-2);
+}
+
+.chat__input {
+  flex: 1;
+  min-height: 42px;
+  max-height: 120px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.6;
+  resize: vertical;
+  transition: border-color 0.25s var(--ease-out);
+}
+
+.chat__input:focus {
+  border-color: var(--line-strong);
+  outline: none;
+}
+
+.chat__input:disabled {
+  opacity: 0.6;
+}
+
+.chat__send {
+  align-self: stretch;
+  padding: 0 20px;
+}
+
+.chat__hint {
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--text-3);
+}
+
+/* 颜色工具（已移除），color__rand 被密码生成器复用 */
 .color__rand {
   margin-top: var(--sp-3);
   display: flex;

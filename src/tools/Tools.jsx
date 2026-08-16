@@ -10,7 +10,7 @@ import PasswordGen from "./tools/PasswordGen.jsx";
 import UnitConverter from "./tools/UnitConverter.jsx";
 import TallyCounter from "./tools/TallyCounter.jsx";
 import StickyNotes from "./tools/StickyNotes.jsx";
-import ColorTool from "./tools/ColorTool.jsx";
+import AiChat from "./tools/AiChat.jsx";
 import "./tools.css";
 
 const TOOLS = [
@@ -23,7 +23,8 @@ const TOOLS = [
   { id: "unit-converter", name: "单位换算", tag: "换算", desc: "长度、重量、温度三类的双向换算。", component: UnitConverter },
   { id: "tally-counter", name: "计数打卡", tag: "计数", desc: "点一下 +1，记录次数，刷新页面不丢。", component: TallyCounter },
   { id: "sticky-notes", name: "便签本", tag: "备忘", desc: "多篇笔记：新建、打开、保存，存在本机浏览器里。", component: StickyNotes },
-  { id: "color-tool", name: "颜色工具", tag: "设计", desc: "取色器 + HEX/RGB 转换 + 随机配色。", component: ColorTool },
+  /* wide: true 的卡片横跨整行（AI 对话需要更宽的聊天界面） */
+  { id: "ai-chat", name: "AI 对话", tag: "聊天", desc: "填上自己的 API Key 就能和 AI 聊天，支持多轮对话、导出/导入记录，数据只存本机。", component: AiChat, wide: true },
 ];
 
 export default function Tools() {
@@ -50,8 +51,8 @@ export default function Tools() {
         </header>
 
         <div className="tools__grid">
-          {TOOLS.map(({ id, name, tag, desc, component: Comp }) => (
-            <article className="tool-card" key={id}>
+          {TOOLS.map(({ id, name, tag, desc, component: Comp, wide }) => (
+            <article className={`tool-card${wide ? " tool-card--wide" : ""}`} key={id}>
               <div className="tool-card__head">
                 <h2 className="tool-card__title">{name}</h2>
                 <span className="tool-card__tag mono-label">{tag}</span>
