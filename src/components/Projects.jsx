@@ -12,7 +12,7 @@ import "./Projects.css";
    - 点图片本体触发 onOpen（直达应用或灯箱看大图） */
 const SWITCH_EASE = [0.22, 1, 0.36, 1];
 
-function MediaSwitcher({ images, imageFit, title, viewLabel, onOpen }) {
+function MediaSwitcher({ images, imageFit, title, viewLabel, onOpen, onOpenApp }) {
   const [idx, setIdx] = useState(0);
   const [dir, setDir] = useState(1);
   const count = images.length;
@@ -39,8 +39,9 @@ function MediaSwitcher({ images, imageFit, title, viewLabel, onOpen }) {
       className="project-card__media project-card__media--switch"
       role="button"
       tabIndex={0}
-      aria-label={`${title}：${count} 张截图，可切换`}
+      aria-label={`${title}：${count} 张截图，${onOpenApp ? "单击看大图，双击打开应用" : "单击看大图"}`}
       onClick={() => onOpen(images[idx])}
+      onDoubleClick={onOpenApp}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
@@ -227,14 +228,15 @@ export default function Projects() {
                       images={imgs}
                       imageFit={project.imageFit}
                       title={project.title}
-                      viewLabel={toApp ? "打开应用 ↗" : "查看图片 ↗"}
+                      viewLabel={toApp ? "查看大图 / 双击打开应用" : "单击看大图"}
                       onOpen={(src) =>
-                        toApp
-                          ? (window.location.hash = project.link)
-                          : setActiveLightbox({
-                              projectId: project.id,
-                              index: imgs.indexOf(src),
-                            })
+                        setActiveLightbox({
+                          projectId: project.id,
+                          index: imgs.indexOf(src),
+                        })
+                      }
+                      onOpenApp={
+                        toApp ? () => (window.location.hash = project.link) : undefined
                       }
                     />
                   ) : toApp ? (
