@@ -111,6 +111,18 @@ export const site = {
         variant: 1,
         link: "#",
       },
+      {
+        id: "webchat",
+        title: "WebChat 聊天室",
+        tagline: "WebChat",
+        desc: "点对点在线聊天应用：身份码互加好友、实时收发消息、群聊，基于 Supabase 实时推送，手机电脑都能聊。",
+        year: "2026",
+        type: "Web 应用",
+        stack: ["HTML", "JavaScript", "Supabase"],
+        image: null, // 占位图（variant 2）；有截图后填 "images/xxx.png"
+        variant: 2,
+        link: "#/webchat", // 非 "#" 时卡片直达应用
+      },
     ],
   },
 
