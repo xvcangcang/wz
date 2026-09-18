@@ -8,6 +8,7 @@ const NAV_LINKS = [
   { label: "精选项目", href: "#projects" },
   { label: "个人优势", href: "#strengths" },
   { label: "工具箱", href: "#/tools" },
+  { label: "聊天", href: "#/webchat" },
   /* 联系入口用右侧「联系我」按钮，文字菜单里不再重复 */
 ];
 
