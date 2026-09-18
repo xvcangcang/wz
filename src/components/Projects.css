@@ -111,6 +111,15 @@
   will-change: transform, opacity, filter;
 }
 
+/* 暗色底衬放在框上（不随图层滑动）：划入的图层只带照片，黑边处露出底衬 */
+.project-card__media--switch {
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+}
+
+.project-card__media--switch .project-card__img--contain {
+  background: none;
+}
+
 .project-card__nav {
   position: absolute;
   top: 50%;

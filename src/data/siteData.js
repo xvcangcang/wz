@@ -122,6 +122,7 @@ export const site = {
         type: "Web 应用",
         stack: ["HTML", "JavaScript", "Supabase"],
         images: ["images/webchat-ui.png", "images/webchat-about.png"], // 实机截图：卡片内箭头/圆点切换
+        imageFit: "contain", // 宽幅截图完整显示不裁切（上下留黑边）
         variant: 2,
         link: "#/webchat", // 非 "#" 时卡片直达应用
       },
