@@ -147,7 +147,17 @@ function MediaSwitcher({ images, imageFit, title, viewLabel, onOpen }) {
 
 export default function Projects() {
   const { projects } = site;
-  const [activeImage, setActiveImage] = useState(null);
+  /* activeLightbox: { projectId, index } | null */
+  const [activeLightbox, setActiveLightbox] = useState(null);
+  const activeProject = activeLightbox
+    ? projects.items.find((p) => p.id === activeLightbox.projectId)
+    : null;
+  const activeImages = activeProject?.images?.length
+    ? activeProject.images
+    : activeProject?.image
+      ? [activeProject.image]
+      : [];
+
   return (
     <section id="projects" className="section projects">
       <div className="container">
@@ -221,7 +231,10 @@ export default function Projects() {
                       onOpen={(src) =>
                         toApp
                           ? (window.location.hash = project.link)
-                          : setActiveImage({ src, title: project.title })
+                          : setActiveLightbox({
+                              projectId: project.id,
+                              index: imgs.indexOf(src),
+                            })
                       }
                     />
                   ) : toApp ? (
@@ -239,7 +252,7 @@ export default function Projects() {
                       aria-label={`${project.title}（${project.type}）`}
                       onClick={(e) => {
                         e.preventDefault();
-                        setActiveImage({ src: project.image, title: project.title });
+                        setActiveLightbox({ projectId: project.id, index: 0 });
                       }}
                     >
                       {media}
@@ -253,9 +266,13 @@ export default function Projects() {
       </div>
 
       <Lightbox
-        image={activeImage?.src}
-        title={activeImage?.title}
-        onClose={() => setActiveImage(null)}
+        images={activeImages}
+        index={activeLightbox?.index ?? 0}
+        title={activeProject?.title}
+        onIndex={(i) =>
+          setActiveLightbox((prev) => (prev ? { ...prev, index: i } : prev))
+        }
+        onClose={() => setActiveLightbox(null)}
       />
     </section>
   );
