@@ -8,7 +8,9 @@
    2. projects[].image —— 填截图地址（如 "images/xxx.png"，截图放
                          public/images/ 下）后，卡片自动用 <img>
                          替换 SVG 占位图
-   3. about.gallery[].src —— 个人图集：把 src 换成真实照片地址（照片放
+   3. projects[].images —— 填 2+ 张截图数组后，卡片媒体区启用箭头/圆点
+                         切换（优先级高于 image）
+   4. about.gallery[].src —— 个人图集：把 src 换成真实照片地址（照片放
                          public/images/gallery/ 下）即可替换占位图
    ★ 图片地址一律不带前导 /（相对路径），部署在 GitHub Pages 子路径下才能正常加载
    ============================================================ */
@@ -119,7 +121,7 @@ export const site = {
         year: "2026",
         type: "Web 应用",
         stack: ["HTML", "JavaScript", "Supabase"],
-        image: null, // 占位图（variant 2）；有截图后填 "images/xxx.png"
+        images: ["images/webchat-chat.png", "images/webchat-about.png"], // 实机截图：卡片内箭头/圆点切换
         variant: 2,
         link: "#/webchat", // 非 "#" 时卡片直达应用
       },
