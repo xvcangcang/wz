@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SectionHeader from "./SectionHeader.jsx";
 import Reveal from "./Reveal.jsx";
@@ -16,6 +16,8 @@ function MediaSwitcher({ images, imageFit, title, viewLabel, onOpen, onOpenApp }
   const [idx, setIdx] = useState(0);
   const [dir, setDir] = useState(1);
   const count = images.length;
+  /* 单击/双击判定：250ms 内二次点击视为双击 → 打开应用；否则看大图 */
+  const clickTimer = useRef(null);
   const step = (d) => {
     setDir(d);
     setIdx((idx + d + count) % count);
@@ -34,14 +36,33 @@ function MediaSwitcher({ images, imageFit, title, viewLabel, onOpen, onOpenApp }
     });
   }, [images]);
 
+  /* 清理未触发的定时器 */
+  useEffect(() => () => clearTimeout(clickTimer.current), []);
+
+  const handleMediaClick = () => {
+    if (!onOpenApp) {
+      onOpen(images[idx]);
+      return;
+    }
+    if (clickTimer.current) {
+      clearTimeout(clickTimer.current);
+      clickTimer.current = null;
+      onOpenApp();
+    } else {
+      clickTimer.current = setTimeout(() => {
+        clickTimer.current = null;
+        onOpen(images[idx]);
+      }, 250);
+    }
+  };
+
   return (
     <div
       className="project-card__media project-card__media--switch"
       role="button"
       tabIndex={0}
       aria-label={`${title}：${count} 张截图，${onOpenApp ? "单击看大图，双击打开应用" : "单击看大图"}`}
-      onClick={() => onOpen(images[idx])}
-      onDoubleClick={onOpenApp}
+      onClick={handleMediaClick}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
