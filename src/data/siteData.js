@@ -121,7 +121,7 @@ export const site = {
         year: "2026",
         type: "Web 应用",
         stack: ["HTML", "JavaScript", "Supabase"],
-        images: ["images/webchat-chat.png", "images/webchat-about.png"], // 实机截图：卡片内箭头/圆点切换
+        images: ["images/webchat-ui.png", "images/webchat-about.png"], // 实机截图：卡片内箭头/圆点切换
         variant: 2,
         link: "#/webchat", // 非 "#" 时卡片直达应用
       },
