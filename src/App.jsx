@@ -1,5 +1,6 @@
 /* hash 路由（零依赖，兼容 GitHub Pages 子路径部署）：
    - #/tools → 工具箱页
+   - #/webchat → 聊天室页
    - 其余 hash（#top、#about…）→ 主页 + 锚点滚动 */
 import { useEffect, useState } from "react";
 import { MotionConfig } from "framer-motion";
@@ -10,16 +11,21 @@ import Projects from "./components/Projects.jsx";
 import Strengths from "./components/Strengths.jsx";
 import Contact from "./components/Contact.jsx";
 import Tools from "./tools/Tools.jsx";
+import WebChat from "./components/WebChat.jsx";
 
 export default function App() {
-  const [route, setRoute] = useState(() =>
-    window.location.hash === "#/tools" ? "tools" : "home"
-  );
+  const [route, setRoute] = useState(() => {
+    const hash = window.location.hash;
+    if (hash === "#/tools") return "tools";
+    if (hash === "#/webchat") return "webchat";
+    return "home";
+  });
 
   useEffect(() => {
     const onHash = () => {
-      if (window.location.hash === "#/tools") {
-        setRoute("tools");
+      const hash = window.location.hash;
+      if (hash === "#/tools" || hash === "#/webchat") {
+        setRoute(hash === "#/tools" ? "tools" : "webchat");
         window.scrollTo(0, 0);
         return;
       }
@@ -44,6 +50,16 @@ export default function App() {
       <MotionConfig reducedMotion="user">
         <Navbar />
         <Tools />
+        <div className="noise" aria-hidden="true" />
+      </MotionConfig>
+    );
+  }
+
+  if (route === "webchat") {
+    return (
+      <MotionConfig reducedMotion="user">
+        <Navbar />
+        <WebChat />
         <div className="noise" aria-hidden="true" />
       </MotionConfig>
     );
