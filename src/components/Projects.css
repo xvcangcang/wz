@@ -103,10 +103,12 @@
   cursor: pointer;
 }
 
-/* 切换过渡时两张图叠放交叉淡入淡出，避免布局跳动 */
-.project-card__media--switch .project-card__img {
+/* 切换层：两张图叠放做滑动/旋转/模糊过渡（与「My life」图集同款动效）
+   动效作用在层上，图片本体留给 CSS 悬停缩放，两者互不干扰 */
+.project-card__switch-layer {
   position: absolute;
   inset: 0;
+  will-change: transform, opacity, filter;
 }
 
 .project-card__nav {

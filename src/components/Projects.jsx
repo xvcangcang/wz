@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SectionHeader from "./SectionHeader.jsx";
 import Reveal from "./Reveal.jsx";
@@ -7,13 +7,32 @@ import Lightbox from "./Lightbox.jsx";
 import { site } from "../data/siteData.js";
 import "./Projects.css";
 
-/* 多图切换：项目配 2+ 张截图时媒体区启用，箭头/圆点切换（样式对齐螺旋图集）
-   - 点图片本体触发 onOpen（直达应用或灯箱看大图）
-   - 切换为淡入淡出，两张图绝对定位叠放避免过渡时跳动 */
+/* 多图切换：项目配 2+ 张截图时媒体区启用，箭头/圆点切换
+   - 切换动效与「My life」螺旋图集同款：滑动 + 旋转 + 模糊
+   - 点图片本体触发 onOpen（直达应用或灯箱看大图） */
+const SWITCH_EASE = [0.22, 1, 0.36, 1];
+
 function MediaSwitcher({ images, imageFit, title, viewLabel, onOpen }) {
   const [idx, setIdx] = useState(0);
+  const [dir, setDir] = useState(1);
   const count = images.length;
-  const step = (dir) => setIdx((idx + dir + count) % count);
+  const step = (d) => {
+    setDir(d);
+    setIdx((idx + d + count) % count);
+  };
+  /* 圆点直达：按目标方位决定划入方向 */
+  const jump = (target) => {
+    setDir(target > idx ? 1 : -1);
+    setIdx(target);
+  };
+
+  /* 预加载全部截图：切换时新图已在缓存里，动效不卡顿（同螺旋图集） */
+  useEffect(() => {
+    images.forEach((src) => {
+      const im = new Image();
+      im.src = src;
+    });
+  }, [images]);
 
   return (
     <div
@@ -29,20 +48,51 @@ function MediaSwitcher({ images, imageFit, title, viewLabel, onOpen }) {
         }
       }}
     >
-      <AnimatePresence initial={false}>
-        <motion.img
+      <AnimatePresence custom={dir} initial={false}>
+        <motion.div
           key={idx}
-          className={`project-card__img${
-            imageFit === "contain" ? " project-card__img--contain" : ""
-          }`}
-          src={images[idx]}
-          alt={`${title} 截图 ${idx + 1}`}
-          decoding="async"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25, ease: "easeOut" }}
-        />
+          className="project-card__switch-layer"
+          custom={dir}
+          variants={{
+            enter: (d) => ({
+              opacity: 0,
+              x: d * 90,
+              y: 26,
+              rotate: d * 16,
+              scale: 0.8,
+              filter: "blur(6px)",
+            }),
+            center: {
+              opacity: 1,
+              x: 0,
+              y: 0,
+              rotate: 0,
+              scale: 1,
+              filter: "blur(0px)",
+            },
+            exit: (d) => ({
+              opacity: 0,
+              x: d * -90,
+              y: -26,
+              rotate: d * -16,
+              scale: 0.8,
+              filter: "blur(6px)",
+            }),
+          }}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 0.6, ease: SWITCH_EASE }}
+        >
+          <img
+            className={`project-card__img${
+              imageFit === "contain" ? " project-card__img--contain" : ""
+            }`}
+            src={images[idx]}
+            alt={`${title} 截图 ${idx + 1}`}
+            decoding="async"
+          />
+        </motion.div>
       </AnimatePresence>
 
       <button
@@ -81,7 +131,7 @@ function MediaSwitcher({ images, imageFit, title, viewLabel, onOpen }) {
             aria-label={`查看第 ${i + 1} 张`}
             onClick={(e) => {
               e.stopPropagation();
-              setIdx(i);
+              jump(i);
             }}
           />
         ))}
