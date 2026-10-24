@@ -5,10 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WebChat - 点对点聊天</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Supabase JS SDK（锁定版本 + SRI 完整性校验，防 CDN 投毒） -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.min.js"
-          integrity="sha384-WgXwGL6fUsYJWNaKJgVbrJKGRQwc1vieh2oy4kw9nXqpNDz3tdSsqEYUgeHD/NuF"
-          crossorigin="anonymous"></script>
+  <!-- Supabase JS SDK v2.117.2（本地文件，避免 CDN 在国内被墙导致聊天无法加载；
+       上游用 jsdelivr + SRI，此处改用 vendor/ 下同版本 UMD） -->
+  <script src="vendor/supabase.min.js"></script>
 </head>
 <body>
   <!-- 加载动画 -->
