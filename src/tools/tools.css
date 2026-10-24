@@ -347,6 +347,223 @@
   margin-top: var(--sp-3);
 }
 
+.countdown__actions {
+  display: flex;
+  gap: var(--sp-2);
+}
+
+.countdown__fs-hint {
+  margin-top: var(--sp-2);
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+/* ---------- 倒计时全屏沉浸界面 ---------- */
+/* 全屏时隐藏常规表单，整屏只留大数字界面 */
+.countdown:fullscreen .countdown__normal {
+  display: none;
+}
+
+.countdown__fs {
+  display: none;
+}
+
+.countdown:fullscreen {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.countdown:fullscreen .countdown__fs {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 2.4vh, 28px);
+  padding: var(--gutter);
+}
+
+/* 极光光斑：与首页 Hero 同款配方（径向渐变 + 大模糊 + 缓慢漂移） */
+.countdown__fs-aurora {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.countdown__fs-aurora i {
+  position: absolute;
+  width: 62vmax;
+  height: 62vmax;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.5;
+  will-change: transform;
+}
+
+.countdown__fs-aurora i:nth-child(1) {
+  top: -18%;
+  left: -12%;
+  background: radial-gradient(circle at center, var(--aurora-blue), transparent 70%);
+  animation: drift-1 26s ease-in-out infinite alternate;
+}
+
+.countdown__fs-aurora i:nth-child(2) {
+  top: 4%;
+  right: -20%;
+  background: radial-gradient(circle at center, var(--aurora-violet), transparent 70%);
+  animation: drift-2 22s ease-in-out infinite alternate;
+}
+
+.countdown__fs-aurora i:nth-child(3) {
+  bottom: -28%;
+  left: 22%;
+  background: radial-gradient(circle at center, var(--aurora-teal), transparent 70%);
+  animation: drift-3 28s ease-in-out infinite alternate;
+}
+
+/* 细网格罩层：中心渐隐，增加科技感 */
+.countdown:fullscreen .countdown__fs::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 20%, transparent 78%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 20%, transparent 78%);
+  pointer-events: none;
+}
+
+.countdown__fs > *:not(.countdown__fs-aurora) {
+  position: relative;
+  z-index: 1;
+}
+
+/* 顶部状态行：呼吸圆点 + 目标名 */
+.countdown__fs-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(12px, 1.4vw, 16px);
+  letter-spacing: 0.3em;
+  color: var(--text-2);
+}
+
+.countdown__fs-pulse {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+/* 巨型天数 */
+.countdown__fs-days {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(10px, 1.6vw, 24px);
+  line-height: 1;
+}
+
+.countdown__fs-days b {
+  font-family: var(--font-mono);
+  font-size: clamp(120px, 30vh, 320px);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-shadow: 0 0 80px var(--accent-glow);
+}
+
+.countdown__fs-days em {
+  font-style: normal;
+  font-size: clamp(28px, 5vh, 64px);
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* 时分秒行 */
+.countdown__fs-hms {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(10px, 2vw, 28px);
+}
+
+.countdown__fs-hms span {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.countdown__fs-hms b {
+  font-family: var(--font-mono);
+  font-size: clamp(44px, 9vh, 108px);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.countdown__fs-hms i {
+  font-style: normal;
+  font-size: clamp(14px, 2.2vh, 24px);
+  color: var(--text-3);
+}
+
+.countdown__fs-sep {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: clamp(36px, 7vh, 88px);
+  color: var(--text-3);
+  opacity: 0.5;
+  transform: translateY(-0.06em);
+}
+
+/* 目标日期 */
+.countdown__fs-date {
+  font-size: clamp(12px, 1.6vw, 16px);
+  letter-spacing: 0.24em;
+  color: var(--text-3);
+}
+
+/* 退出按钮：右上角，常态半透明，悬浮点亮 */
+.countdown__fs-exit {
+  position: absolute;
+  top: clamp(16px, 3vh, 32px);
+  right: clamp(16px, 3vw, 40px);
+  z-index: 2;
+  padding: 10px 20px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(8, 9, 13, 0.5);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: var(--text-2);
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out);
+}
+
+.countdown__fs-exit:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* 手机全屏：天数/时分秒缩一档，仍保持主次分明 */
+@media (max-width: 600px) {
+  .countdown:fullscreen .countdown__fs {
+    gap: clamp(10px, 2vh, 20px);
+  }
+
+  .countdown__fs-hms {
+    gap: 10px;
+  }
+}
+
 /* ---------- 计算器 ---------- */
 .calc__display {
   padding: var(--sp-3) var(--sp-4);
