@@ -172,13 +172,13 @@ export default function DateCountdown() {
       {/* 全屏沉浸界面：仅在 :fullscreen 时显示（Esc 或按钮退出） */}
       {parts && (
         <div className="countdown__fs" aria-hidden={!fsOn}>
-          <div className="countdown__fs-aurora" aria-hidden="true">
+          <div className="tool-fs-aurora" aria-hidden="true">
             <i />
             <i />
             <i />
           </div>
           <p className="countdown__fs-label mono-label">
-            <span className="countdown__fs-pulse" />
+            <span className="tool-fs-pulse" />
             {reached ? `${saved.label} · 已到达` : `距离 ${saved.label}`}
           </p>
           <div className="countdown__fs-days">
@@ -204,7 +204,7 @@ export default function DateCountdown() {
           <p className="countdown__fs-date mono-label">{saved.date}</p>
           <button
             type="button"
-            className="countdown__fs-exit mono-label"
+            className="tool-fs-exit mono-label"
             onClick={toggleFs}
           >
             退出全屏 ✕

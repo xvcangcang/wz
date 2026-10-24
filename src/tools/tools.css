@@ -253,6 +253,91 @@
   font-size: 14px;
 }
 
+/* ---------- 番茄钟全屏沉浸界面 ---------- */
+.pomodoro:fullscreen .pomodoro__normal {
+  display: none;
+}
+
+.pomodoro__fs {
+  display: none;
+}
+
+.pomodoro:fullscreen {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.pomodoro:fullscreen .pomodoro__fs {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 3vh, 32px);
+  padding: var(--gutter);
+}
+
+.pomodoro__fs > *:not(.tool-fs-aurora) {
+  position: relative;
+  z-index: 1;
+}
+
+/* 状态行：呼吸圆点 + 专注中/休息中/已暂停 */
+.pomodoro__fs-mode {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(12px, 1.4vw, 16px);
+  letter-spacing: 0.3em;
+  color: var(--text-2);
+}
+
+/* 大圆环：随视口短边放大，时间嵌在圆心 */
+.pomodoro__fs-ring {
+  position: relative;
+  width: min(52vh, 76vw);
+}
+
+.pomodoro__fs-ring circle {
+  transition: stroke-dashoffset 0.3s linear;
+}
+
+.pomodoro__fs-time {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: clamp(48px, 13vh, 128px);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  text-shadow: 0 0 40px var(--accent-glow);
+}
+
+/* 全屏里的控制按钮：半透明玻璃感 */
+.pomodoro__fs-controls {
+  display: flex;
+  gap: var(--sp-3);
+}
+
+.pomodoro__fs-controls .btn {
+  min-width: 120px;
+  padding: 12px 28px;
+  background: rgba(8, 9, 13, 0.5);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.pomodoro__fs-hint {
+  margin-top: var(--sp-2);
+  font-size: 12px;
+  color: var(--text-3);
+}
+
 /* ---------- 秒表 ---------- */
 .stopwatch__time {
   font-family: var(--font-mono);
@@ -358,6 +443,78 @@
   color: var(--text-3);
 }
 
+/* ---------- 工具全屏通用件（倒计时 / 番茄钟 / 便签本共用） ---------- */
+/* 极光光斑：与首页 Hero 同款配方（径向渐变 + 大模糊 + 缓慢漂移） */
+.tool-fs-aurora {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.tool-fs-aurora i {
+  position: absolute;
+  width: 62vmax;
+  height: 62vmax;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.5;
+  will-change: transform;
+}
+
+.tool-fs-aurora i:nth-child(1) {
+  top: -18%;
+  left: -12%;
+  background: radial-gradient(circle at center, var(--aurora-blue), transparent 70%);
+  animation: drift-1 26s ease-in-out infinite alternate;
+}
+
+.tool-fs-aurora i:nth-child(2) {
+  top: 4%;
+  right: -20%;
+  background: radial-gradient(circle at center, var(--aurora-violet), transparent 70%);
+  animation: drift-2 22s ease-in-out infinite alternate;
+}
+
+.tool-fs-aurora i:nth-child(3) {
+  bottom: -28%;
+  left: 22%;
+  background: radial-gradient(circle at center, var(--aurora-teal), transparent 70%);
+  animation: drift-3 28s ease-in-out infinite alternate;
+}
+
+/* 呼吸状态圆点 */
+.tool-fs-pulse {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+/* 退出按钮：右上角，常态半透明，悬浮点亮 */
+.tool-fs-exit {
+  position: absolute;
+  top: clamp(16px, 3vh, 32px);
+  right: clamp(16px, 3vw, 40px);
+  z-index: 2;
+  padding: 10px 20px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(8, 9, 13, 0.5);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: var(--text-2);
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out);
+}
+
+.tool-fs-exit:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 /* ---------- 倒计时全屏沉浸界面 ---------- */
 /* 全屏时隐藏常规表单，整屏只留大数字界面 */
 .countdown:fullscreen .countdown__normal {
@@ -385,45 +542,6 @@
   padding: var(--gutter);
 }
 
-/* 极光光斑：与首页 Hero 同款配方（径向渐变 + 大模糊 + 缓慢漂移） */
-.countdown__fs-aurora {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.countdown__fs-aurora i {
-  position: absolute;
-  width: 62vmax;
-  height: 62vmax;
-  border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.5;
-  will-change: transform;
-}
-
-.countdown__fs-aurora i:nth-child(1) {
-  top: -18%;
-  left: -12%;
-  background: radial-gradient(circle at center, var(--aurora-blue), transparent 70%);
-  animation: drift-1 26s ease-in-out infinite alternate;
-}
-
-.countdown__fs-aurora i:nth-child(2) {
-  top: 4%;
-  right: -20%;
-  background: radial-gradient(circle at center, var(--aurora-violet), transparent 70%);
-  animation: drift-2 22s ease-in-out infinite alternate;
-}
-
-.countdown__fs-aurora i:nth-child(3) {
-  bottom: -28%;
-  left: 22%;
-  background: radial-gradient(circle at center, var(--aurora-teal), transparent 70%);
-  animation: drift-3 28s ease-in-out infinite alternate;
-}
-
 /* 细网格罩层：中心渐隐，增加科技感 */
 .countdown:fullscreen .countdown__fs::before {
   content: "";
@@ -439,7 +557,7 @@
   pointer-events: none;
 }
 
-.countdown__fs > *:not(.countdown__fs-aurora) {
+.countdown__fs > *:not(.tool-fs-aurora) {
   position: relative;
   z-index: 1;
 }
@@ -452,15 +570,6 @@
   font-size: clamp(12px, 1.4vw, 16px);
   letter-spacing: 0.3em;
   color: var(--text-2);
-}
-
-.countdown__fs-pulse {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 12px var(--accent-glow);
-  animation: pulse 2.4s ease-in-out infinite;
 }
 
 /* 巨型天数 */
@@ -529,28 +638,6 @@
   font-size: clamp(12px, 1.6vw, 16px);
   letter-spacing: 0.24em;
   color: var(--text-3);
-}
-
-/* 退出按钮：右上角，常态半透明，悬浮点亮 */
-.countdown__fs-exit {
-  position: absolute;
-  top: clamp(16px, 3vh, 32px);
-  right: clamp(16px, 3vw, 40px);
-  z-index: 2;
-  padding: 10px 20px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(8, 9, 13, 0.5);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  color: var(--text-2);
-  cursor: pointer;
-  transition: all 0.25s var(--ease-out);
-}
-
-.countdown__fs-exit:hover {
-  border-color: var(--accent);
-  color: var(--accent);
 }
 
 /* 手机全屏：天数/时分秒缩一档，仍保持主次分明 */
@@ -830,6 +917,117 @@
 }
 
 .notes__hint {
+  margin-top: var(--sp-2);
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+/* ---------- 便签本全屏沉浸编辑器 ---------- */
+.notes:fullscreen .notes__normal {
+  display: none;
+}
+
+.notes__fs {
+  display: none;
+}
+
+.notes:fullscreen {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.notes:fullscreen .notes__fs {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(48px, 6vh, 72px) clamp(24px, 6vw, 96px) clamp(20px, 4vh, 40px);
+}
+
+.notes__fs > *:not(.tool-fs-aurora) {
+  position: relative;
+  z-index: 1;
+}
+
+/* 极光调淡，保证书写区可读 */
+.notes:fullscreen .tool-fs-aurora i {
+  opacity: 0.22;
+}
+
+/* 居中大编辑列 */
+.notes__fs-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  gap: var(--sp-2);
+  min-height: 0;
+}
+
+/* 大标题输入：去掉常规输入框底色，融进背景 */
+.notes__fs-title {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: clamp(24px, 4vh, 40px);
+  font-weight: 700;
+  color: var(--text);
+  padding: 0 4px;
+}
+
+.notes__fs-title::placeholder {
+  color: var(--text-3);
+}
+
+/* 大书写区：占满剩余空间 */
+.notes__fs-content {
+  flex: 1;
+  min-height: 0;
+  resize: none;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: clamp(16px, 2.4vh, 22px);
+  line-height: 1.8;
+  color: var(--text-2);
+  padding: 4px;
+}
+
+.notes__fs-content::placeholder {
+  color: var(--text-3);
+}
+
+/* 底部状态条：字数在左，操作在右 */
+.notes__fs-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--line);
+  font-size: clamp(12px, 1.4vw, 14px);
+  letter-spacing: 0.16em;
+  color: var(--text-3);
+}
+
+.notes__fs-actions {
+  display: flex;
+  gap: var(--sp-2);
+}
+
+/* 手机全屏：编辑列贴边，字号缩一档 */
+@media (max-width: 600px) {
+  .notes:fullscreen .notes__fs {
+    padding: 56px 16px 16px;
+  }
+}
+
+.notes__fs-hint {
   margin-top: var(--sp-2);
   font-size: 12px;
   color: var(--text-3);

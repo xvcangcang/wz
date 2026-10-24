@@ -1,4 +1,5 @@
-/* 番茄钟：专注/休息时长可自定义（存 localStorage），SVG 圆环进度，结束时响铃三声 */
+/* 番茄钟：专注/休息时长可自定义（存 localStorage），SVG 圆环进度，结束时响铃三声
+   支持全屏：全屏后进入沉浸式大圆环界面（极光背景 + 大字倒计时） */
 import { useEffect, useRef, useState } from "react";
 
 const KEY = "tool-pomodoro";
@@ -52,8 +53,34 @@ export default function Pomodoro() {
   const [mode, setMode] = useState("work");
   const [left, setLeft] = useState(loadMins().work * 60);
   const [running, setRunning] = useState(false);
+  const [fsOn, setFsOn] = useState(false);
+  const [fsHint, setFsHint] = useState("");
   const endRef = useRef(null); // 本轮结束时间戳（毫秒）
   const prevTitleRef = useRef(null);
+  const wrapRef = useRef(null);
+
+  /* 监听全屏状态（Esc 退出也能同步显示） */
+  useEffect(() => {
+    const onChange = () => setFsOn(document.fullscreenElement === wrapRef.current);
+    document.addEventListener("fullscreenchange", onChange);
+    return () => document.removeEventListener("fullscreenchange", onChange);
+  }, []);
+
+  const toggleFs = async () => {
+    if (!wrapRef.current) return;
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      } else {
+        await wrapRef.current.requestFullscreen();
+      }
+      setFsHint("");
+    } catch {
+      /* iOS Safari 等不支持元素全屏 */
+      setFsHint("当前浏览器不支持全屏，请试试电脑浏览器或 Safari/Chrome 最新版");
+      setTimeout(() => setFsHint(""), 3000);
+    }
+  };
 
   const seconds = (mode === "work" ? mins.work : mins.rest) * 60;
 
@@ -127,7 +154,8 @@ export default function Pomodoro() {
   const progress = 1 - left / seconds;
 
   return (
-    <div>
+    <div className="pomodoro" ref={wrapRef}>
+      <div className="pomodoro__normal">
       <div className="pomodoro__ring-wrap">
         <svg width="200" height="200" viewBox="0 0 200 200" aria-hidden="true">
           <circle
@@ -202,6 +230,64 @@ export default function Pomodoro() {
         </button>
         <button type="button" className="btn btn--ghost" onClick={reset}>
           重置
+        </button>
+        <button type="button" className="btn btn--ghost" onClick={toggleFs}>
+          全屏
+        </button>
+      </div>
+      {fsHint && <p className="pomodoro__fs-hint">{fsHint}</p>}
+      </div>
+
+      {/* 全屏沉浸界面：仅在 :fullscreen 时显示（Esc 或按钮退出） */}
+      <div className="pomodoro__fs" aria-hidden={!fsOn}>
+        <div className="tool-fs-aurora" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+        </div>
+        <p className="pomodoro__fs-mode mono-label">
+          <span className="tool-fs-pulse" />
+          {running ? (mode === "work" ? "专注中" : "休息中") : "已暂停"}
+        </p>
+        <div className="pomodoro__fs-ring">
+          <svg width="200" height="200" viewBox="0 0 200 200" aria-hidden="true">
+            <circle
+              cx="100"
+              cy="100"
+              r={R}
+              fill="none"
+              stroke="var(--surface-2)"
+              strokeWidth="2"
+            />
+            <circle
+              cx="100"
+              cy="100"
+              r={R}
+              fill="none"
+              stroke={mode === "work" ? "var(--accent)" : "var(--aurora-teal)"}
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeDasharray={CIRC}
+              strokeDashoffset={CIRC * (1 - progress)}
+              transform="rotate(-90 100 100)"
+            />
+          </svg>
+          <div className="pomodoro__fs-time">{fmt(left)}</div>
+        </div>
+        <div className="pomodoro__fs-controls">
+          <button type="button" className="btn btn--primary" onClick={toggle}>
+            {running ? "暂停" : "开始"}
+          </button>
+          <button type="button" className="btn btn--ghost" onClick={reset}>
+            重置
+          </button>
+        </div>
+        <button
+          type="button"
+          className="tool-fs-exit mono-label"
+          onClick={toggleFs}
+        >
+          退出全屏 ✕
         </button>
       </div>
     </div>
